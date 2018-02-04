@@ -1,0 +1,83 @@
+html,
+h1{
+	font-family: "Comic Sans MS", cursive, sans-serif;
+	color: BurlyWood;
+	font-size: medium;
+	text-align: center;
+}
+h2{
+	font-family: "Impact", Charcoal, sans-serif;
+	
+}
+body{
+    color: black;
+}
+.menu{
+        list-style-type: none;
+        margin: 0;
+        padding: 0;
+        overflow: hidden;
+        background-color: #e0e0e0 ;
+}
+.container{
+        text-align: center;
+        border: 3px green;
+        border-style: solid;
+}
+li a {
+        display: inline-block;
+        color: black;
+        text-align: center;
+        padding: 14px 16px;
+        text-decoration: none;
+}
+li a:hover {
+        background-color: white;
+} 
+#pictures{
+    margin-left: auto;
+    margin-right: auto;
+    vertical-align: middle;
+}
+.columns{
+    float: left;
+    position: relative;
+    margin-right: 20px;
+}
+table {
+    font-family: arial, sans-serif;
+    border-collapse: collapse;
+    width: 95%;
+    vertical-align: middle;
+    margin-left: auto;
+    margin-right: auto;
+}
+td{
+    text-align: center;
+}
+th{
+    text-align: center;
+}
+ul.menu li{
+    float: left;
+}
+.list li{
+    float: left;
+}
+#l2{
+    margin: auto;
+    background-color: white;
+}
+li span{
+    color:black;
+}
+footer{
+    text-align: center;
+    clear:inherit;
+    font-size: 4;
+    color: red;
+}
+#imgfooter{
+    width:150px;
+    height:150px;
+}
