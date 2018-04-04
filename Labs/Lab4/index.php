@@ -35,8 +35,9 @@
            Sort By Price<input type= "submit" name = "sortbyprice" value = "Enter"/><br/>
            </div>
         </form>
+
         <?php
-            if($_SERVER['REQUEST_METHOD'] == 'GET')
+            if($_SERVER['REQUEST_METHOD'] === 'GET')
             {
                 if(isset($_GET['filterBy']))
                 {
@@ -53,34 +54,46 @@
                     {
                         $sql = "SELECT * from device where deviceName LIKE ". "'%".$_GET['dName'] . "%'" . " AND deviceType = '" . $_GET['dType'] . " ' AND status = '" . $_GET['dAvailability']. "';";
                     }
+                    elseif (isset($_GET['dName'])) {
+                        $sql = "SELECT * from device where deviceName LIKE " . "'%" . $_GET['dName'] . "%'" . ";";
+                    }
                     
                     $stmt = $dbConn->prepare($sql);
                     $stmt->execute();
-                    
-                    var_dump($host);
-                    
-                    echo "<table class = 'info'>
-                            <thead>
-                                <tr>
-                                    <th> Device Name</th>
-                                    <th> Device Type</th>
-                                    <th> Device Price</th>
-                                    <th> Device Availability</th>
-                                </tr>
-                            </thead></table>";
+                     $val=0;
+                    echo "<body>
+                        <table class = 'info'>
+                        <thead>
+                            <tr>
+                                <th> Device Name</th>
+                                <th> Device Type</th>
+                                <th> Device Price</th>
+                                <th> Device Status</th>
+                            </tr>
+                        </thead>
+                        </body>";
                          
                     while($result = $stmt->fetch())
                     {
-                        echo"<tr><td>" . 
-                            $result['deviceName'] . 
-                            "<tr><td>" . 
-                            $result['deviceType'] .
-                            "<tr><td>" .
-                            $result['price'] .
-                            "<tr><td>" .
-                            $result['status'] .
-                            "</td><td></tr>";
+                        
+                        echo"<tr>
+                            <td>
+                            <div class=\"box\">
+                                ". $result['deviceName'] ."
+                            </div>
+                            </td>
+                            <td>". $result['deviceType'] ."</td>
+    
+                            <td>"."$". $result['price'] ."</td>
+                            <td>". $result['status'] ."</td>
+                        </tr>";
+                        
+                        
                     }
+                }
+                if(isset($_GET['sortbyname']))
+                {
+                    displaybyName();
                 }
                 if(isset($_GET['sortbyprice']))
                 {
@@ -88,79 +101,51 @@
                 }
             }
         ?>
-            <!--$dName = '';-->
-            <!--if('POST'===$_SERVER['REQUEST_METHOD'])-->
-            <!--{-->
-            <!--    $dName = $_POST['dName'];-->
-            <!--    //displaybyName();-->
-            <!--}-->
-            <!--if(isset($_GET['dType']))-->
-            <!--{-->
-            <!--    displaybyType();-->
-            <!--}-->
-            <!--if(isset($_GET['dAvailability']))-->
-            <!--{-->
-            <!--    displaybyAvailability();-->
-            <!--}-->
-            <!--if(isset($_GET['sortbyname']))-->
-            <!--{-->
-            <!--    displaybyName();-->
-            <!--}-->
-            <!--if(isset($_GET['sortbyprice']))-->
-            <!--{-->
-            <!--    displaybyPrice();-->
-            <!--}-->
+            
         
     </body> 
 </html>
 <?php
     function displaybyName()
     {
-        $host = "localhost";
-        $dbname = "tech";
-        $username = getenv('C9_USER');
-        $password = "p4ssw0rd";
         
-        $dbConn = new PDO("mysql:host=$host;dbname=$dbname", $username, $password);
         
-        // Raise error if something is wrong with the connection
-        $dbConn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-        $sql = "SELECT
-                d.`name` AS  'deviceName',
-                dt.`name` AS  'deviceType',
-                s.`name` AS 'status'
-        FROM `device` AS d";
-        
-        if (!empty($dName)) {
-            $sql = $sql."
-                WHERE d.`name` LIKE CONCAT('%', :dName, '%')
-                OR dt.`name` LIKE CONCAT('%', :dName, '%')
-                OR s.`name` LIKE CONCAT('%', :dName, '%')
-                ";
-        }
-        $stmt = $dbConn->prepare($sql);
-        $stmt->execute(array(':dName' => $dName));
-        if ($stmt->rowCount() > 0) {
-            while ($row = $stmt->fetch()) {
-                echo '<tr>';
-
-                echo '  <th scope="row">'.$row['deviceName'].'</th>';
-
-                //   <td>Mark</td>
-                echo '  <td>'.$row['deviceType'].'</td>';
-
-                //   <td>Otto</td>
-                echo '  <td>'.$row['price'].'</td>';
-
-                //   <td>@mdo</td>
-                echo '  <td>'.$row['status'].'</td>';
-
-                // </tr>
-                echo '</tr>';
+        echo "
+            <body>
+            <table class = 'info'>
+            <thead>
+                <tr>
+                    <th> Device Name</th>
+                    <th> Device Type</th>
+                    <th> Device Status</th>
+                </tr>
+            </thead>
+            </body>";
+            $servername="localhost";
+            $dbname = "tech";
+            $username = getenv('C9_USER');
+            $password = "p4ssw0rd";
+            $dbConn = new PDO("mysql:host=$servername;dbname=$dbname", $username, $password);
+            $dbConn -> setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+            $sql = "SELECT deviceName, deviceType, status from device Order By device.deviceName ASC";
+            $stmt = $dbConn->prepare($sql);
+            $stmt->execute();
+            $val=0;
+            while($row=$stmt->fetch())
+            {
+                echo"<tr>
+                            <td>
+                            <div class=\"box\">
+                                ". $row['deviceName'] ."
+                            </div>
+                            <td>". $row['deviceType'] ."</td>
+                                
+                            </td>
+                            <td>". $row['status'] ."</td>
+                        </tr>";
+                    $val = $val +1;
             }
-        } else {
-            echo '<tr><td colspan="5">No Device Found</td></tr>';
-        }
+        
     }
     function displaybyPrice()
     {
