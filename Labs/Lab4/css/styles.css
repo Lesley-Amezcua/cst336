@@ -1,0 +1,40 @@
+h1{
+    text-align: center;
+}
+body{
+    text-align: center;
+    background-color: grey;
+    font-family: "Roboto", helvetica, arial, sans-serif;
+    font-size: 16px;
+    
+}
+#formm{
+    text-align: center;
+}
+.info{
+    background:white;
+    border-radius: 3px;
+    border-collapse: collapse;
+    height:320px;
+    margin:auto;
+    max-width: 600px;
+    width: 100%;
+}
+.box{
+    width: 40%;
+    margin: 0 auto;
+    padding: 35px;
+    background-clip: padding-box;
+    text-align: center;
+    /*background: rgb(0,0,128);*/
+    
+}
+th{
+    color: black;
+    background: #D3D3D3;
+    font-size: 23px;
+    font-weight: 100;
+    padding: 24px;
+    text-align: left;
+    vertical-align: middle;
+}

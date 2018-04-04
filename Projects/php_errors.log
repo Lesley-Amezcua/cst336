@@ -1,0 +1,10 @@
+[26-Mar-2018 16:38:32 UTC] PHP Fatal error:  Uncaught PDOException: SQLSTATE[HY000] [1045] Access denied for user 'lesleyamezcua'@'localhost' (using password: NO) in /home/ubuntu/workspace/Projects/teamProject/index.php:7
+Stack trace:
+#0 /home/ubuntu/workspace/Projects/teamProject/index.php(7): PDO->__construct('mysql:host=0.0....', 'lesleyamezcua', '')
+#1 {main}
+  thrown in /home/ubuntu/workspace/Projects/teamProject/index.php on line 7
+[26-Mar-2018 16:38:36 UTC] PHP Fatal error:  Uncaught PDOException: SQLSTATE[HY000] [1045] Access denied for user 'lesleyamezcua'@'localhost' (using password: NO) in /home/ubuntu/workspace/Projects/teamProject/index.php:7
+Stack trace:
+#0 /home/ubuntu/workspace/Projects/teamProject/index.php(7): PDO->__construct('mysql:host=0.0....', 'lesleyamezcua', '')
+#1 {main}
+  thrown in /home/ubuntu/workspace/Projects/teamProject/index.php on line 7
